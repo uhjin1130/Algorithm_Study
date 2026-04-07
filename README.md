@@ -61,4 +61,3 @@ git push origin main
 
 - 백준 풀이 기록 관리
 - Java 문법과 알고리즘 복습
-- GitHub 포트폴리오 정리
