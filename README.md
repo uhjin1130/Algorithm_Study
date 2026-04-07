@@ -41,15 +41,6 @@ javac -d bin src\boj_15666\Main.java
 java -cp bin boj_15666.Main
 ```
 
-## Git
-
-처음 Git을 설정할 때는 사용자 정보를 등록해야 합니다.
-
-```bash
-git config --global user.name "your-name"
-git config --global user.email "your-email@example.com"
-```
-
 원격 저장소와 히스토리가 다를 때는 먼저 pull 후 push 합니다.
 
 ```bash
