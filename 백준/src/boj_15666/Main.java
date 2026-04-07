@@ -1,3 +1,5 @@
+package boj_15666;
+
 import java.util.*;
 import java.io.*;
 
@@ -47,4 +49,5 @@ public class Main {
 			
 		}
 	}
+
 }
