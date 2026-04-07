@@ -1,8 +1,5 @@
 # Algorithm Study
 
-Java로 알고리즘 문제를 풀이하고 정리하는 저장소입니다.
-문제별로 폴더를 분리해 관리하며, GitHub에 학습 기록이 남도록 구성했습니다.
-
 ## Structure
 
 ```text
