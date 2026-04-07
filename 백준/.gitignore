@@ -1,1 +1,30 @@
+# Java build outputs
 bin/
+out/
+*.class
+
+# Package artifacts
+*.jar
+*.war
+*.ear
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IntelliJ
+.idea/
+*.iml
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# OS files
+.DS_Store
+Thumbs.db
