@@ -1,9 +1,9 @@
-package algorithm_study;
+package Baekjoon;
 
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class baek_15666 {
 	
 	public static int N, M;
 	public static int[] arr;
@@ -49,5 +49,4 @@ public class Main {
 			
 		}
 	}
-
 }
