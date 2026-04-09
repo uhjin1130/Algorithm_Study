@@ -18,7 +18,7 @@ public class Main {
         arr = new int[n+1][n+1];
         visit = new boolean[n+1];
 
-        for(int i = 1; i <= m; i++){
+        for(int i = 0; i < m; i++){
             StringTokenizer st1 = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st1.nextToken());
             int b = Integer.parseInt(st1.nextToken());
@@ -39,7 +39,7 @@ public class Main {
         visit[start] = true;
         sb.append(start+" ");
         
-        for(int i = 1; i <= n; i++){
+        for(int i = 0; i <= n; i++){
             if(!visit[i] && arr[start][i] == 1){
                 dfs(i);
             }
@@ -54,7 +54,7 @@ public class Main {
         while(!queue.isEmpty()){
             start = queue.poll();
             sb.append(start + " ");
-            for(int i = 1; i <= n; i++){
+            for(int i = 0; i <= n; i++){
                 if(!visit[i] && arr[start][i] == 1){
                     queue.add(i);
                     visit[i] = true;
