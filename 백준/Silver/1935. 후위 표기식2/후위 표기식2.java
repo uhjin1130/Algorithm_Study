@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Main {
@@ -46,6 +47,7 @@ public class Main {
             }
         }
 
-        System.out.printf("%.2f", stack.pop());
+        DecimalFormat df = new DecimalFormat("0.00");
+        System.out.println(df.format(stack.pop()));
     }
 }
