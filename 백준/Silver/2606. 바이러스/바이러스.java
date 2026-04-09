@@ -1,53 +1,53 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
-public class Main{
-    static int n, m;
-    static boolean[] check;
-    static int[][] arr;
-    static int cnt = 0;
-    
-    static Queue<Integer> q = new LinkedList<>();
+public class Main {
+	BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+	static boolean[] visitied;
+	static ArrayList<Integer>[] arr;
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public Main() throws IOException {
+		int N = Integer.parseInt(bf.readLine());
+		int connect_number = Integer.parseInt(bf.readLine());
 
-        n = Integer.parseInt(br.readLine());
-        m = Integer.parseInt(br.readLine());
+		visitied = new boolean[N + 1];
+		arr = new ArrayList[N + 1];
 
-        check = new boolean[n+1];
-        arr = new int[n+1][n+1];
+		setBridge(N, connect_number);
+		System.out.print(dfs(1) - 1);
+	}
 
-        for(int i = 0; i < m; i++){
-            StringTokenizer str = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(str.nextToken());
-            int b = Integer.parseInt(str.nextToken());
+	public void setBridge(int N, int connect) throws IOException {
+		for(int i=1;i<=N;i++) {
+			arr[i] = new ArrayList<>();
+		}
+		
+		for(int i=1;i<=connect;i++) {
+			StringTokenizer st = new StringTokenizer(bf.readLine());
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
+			arr[u].add(v);
+			arr[v].add(u);
+		}
+	}
+	
+	public int dfs(int node) {
+		if(visitied[node])
+			return 0;
+		visitied[node] = true;
+		int count = 1;
+		for(int i : arr[node]) {
+			if(visitied[i] == false) {
+				count += dfs(i);
+			}
+		}
+		return count;
+	}
 
-            arr[a][b] = arr[b][a] = 1;
-        }
-
-        bfs(1);
-
-        System.out.println(cnt);
-    }
-    
-    public static void bfs(int start){
-        check[start] = true;
-        q.add(start);
-        
-        while(!q.isEmpty()){
-            int cur = q.poll();
-            
-            for(int i = 1; i <= n; i++) {
-                if(arr[cur][i] == 1 && !check[i]){
-                    q.add(i);
-                    cnt++;
-                    check[i] = true;
-                }
-            }
-        }
-        
-    }
-
-    
+	public static void main(String[] args) throws IOException {
+		new Main();
+	}
 }
