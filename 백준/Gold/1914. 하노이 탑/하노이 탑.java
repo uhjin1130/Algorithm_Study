@@ -11,8 +11,9 @@ public class Main {
 
         N = Integer.parseInt(br.readLine());
 
-        BigInteger num = new BigInteger("2");
-        sb.append(num.pow(N).subtract(new BigInteger("1"))).append("\n");
+        BigInteger two = BigInteger.valueOf(2);
+        BigInteger moves = two.pow(N).subtract(BigInteger.ONE);
+        sb.append(moves).append('\n');
 
         if (N <= 20) {
             hanoi(N, 1, 2, 3);
@@ -22,8 +23,8 @@ public class Main {
 
     }
 
-    public static void hanoi(int n, int start,int mid, int end){
-        if(n == 1) {
+    public static void hanoi(int n, int start, int mid, int end) {
+        if (n == 1) {
             sb.append(start + " " + end + "\n");
             return;
         }
