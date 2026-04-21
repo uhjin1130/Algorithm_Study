@@ -13,16 +13,18 @@ public class Main {
             dwarfs[i] = Integer.parseInt(br.readLine());
         }
 
-        findDwarf(0,0);
+        findDwarf(0,0, 0);
 
+        System.out.println(sb.toString());
         
 
     } // main
 
-    public static void findDwarf(int cur, int cnt) {
+    public static void findDwarf(int cur, int cnt,  int sum) {
         if(cnt == 7){
-            if(checkSum()) {
-                System.out.println(sb.toString());
+            if(sum == 100) {
+                for(int i : result)
+                    sb.append(i).append("\n");
                 return;
             }
             return;
@@ -30,25 +32,8 @@ public class Main {
 
         for(int i = cur; i < 9; i++){
             result[cnt] = dwarfs[i];
-            findDwarf(i+1, cnt+1);
+            findDwarf(i+1, cnt+1, sum + result[cnt]);
         }
-    }
-
-    public static boolean checkSum(){
-        int sum = 0;
-        sb = new StringBuilder();
-        for(int i : result) {
-            sb.append(i).append("\n");
-            sum += i;
-        }
-
-        if(sum == 100)
-            return true;
-        else {
-            sb = new StringBuilder();
-            return false;
-        }
-
     }
 
 } // class
