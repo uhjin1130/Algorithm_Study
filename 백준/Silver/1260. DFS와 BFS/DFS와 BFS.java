@@ -1,91 +1,64 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	static int N, M, V; // 정점의 개수, 간선의 개수, 출발점
-	static Scanner sc = new Scanner(System.in);
+    public static int N, M, V;
+    public static int[][] nodes;
+    public static boolean[] visited;
+    public static Queue<Integer> queue = new LinkedList<>();
+    public static StringBuilder sb = new StringBuilder();
 
-	static class Graph {
-		private boolean visit[]; // 방문여부
-		private int adj_mat[][]; // 인접 행렬을 이용한 그래프 표현
-		private Stack<Integer> stack;
-		private Queue<Integer> queue;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-		public Graph() {
-			N = sc.nextInt();
-			M = sc.nextInt();
-			V = sc.nextInt();
-			adj_mat = new int[N + 1][N + 1];
-			visit = new boolean[N + 1];
-			stack = new Stack<>();
-			queue = new LinkedList<>();
-		}
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        V = Integer.parseInt(st.nextToken());
 
-		public void addEdge(int start, int end) {
-			adj_mat[start][end] = 1;
-			adj_mat[end][start] = 1;
-		}
+        nodes = new int[N + 1][N + 1];
+        visited = new boolean[N + 1];
 
-		public void DFS() {
-			stack.push(V);
+        int a, b;
+        for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            nodes[a][b] = nodes[b][a] = 1;
+        }
 
-			int currentVertex;
+        dfs(V);
+        sb.append("\n");
 
-			while (!stack.isEmpty()) {
-				currentVertex = stack.pop();
+        visited = new boolean[N + 1];
+        bfs(V);
 
-				if (!visit[currentVertex]) {
-					System.out.print(currentVertex + " ");
-					visit[currentVertex] = true;
-				}
+        System.out.println(sb.toString());
+    }
 
-				// 인접 정점 중에서 가장 작은 값부터 스택에 추가
-				for (int i = N; i > 0; i--) {
-					if (adj_mat[currentVertex][i] == 1 && !visit[i]) {
-						stack.push(i);
-					}
-				}
-			}
-		}
+    public static void dfs(int start) {
+        visited[start] = true;
+        sb.append(start + " ");
 
-		public void BFS() {
-			visit = new boolean[N + 1];
-			int currentVertex = V;
-			
-			visit[currentVertex] = true;
-			System.out.print(currentVertex + " ");
-			
-			queue.offer(currentVertex);
-			while(!queue.isEmpty()) {
-				currentVertex = queue.poll();
-				
-				for(int i=1; i<=N; i++) {
-					if(adj_mat[currentVertex][i] == 1 && !visit[i]) {
-						queue.offer(i);
-						visit[i] = true;
-						System.out.print(i + " ");
-					}
-				}
-			}
-		}
-	}
+        for (int i = 1; i <= N; i++) {
+            if (!visited[i] && nodes[start][i] == 1)
+                dfs(i);
+        }
+    }
 
-	public static void main(String[] args) {
-		Graph graph = new Graph();
+    public static void bfs(int start){
+        visited[start] = true;
+        queue.add(start);
 
-		int start, end;
-
-		// 간선 정보 입력
-		for (int i = 0; i < M; i++) {
-			start = sc.nextInt();
-			end = sc.nextInt();
-			graph.addEdge(start, end);
-		}
-
-		graph.DFS();
-		System.out.println();
-		graph.BFS();
-	}
+        while(!queue.isEmpty()) {
+            start = queue.poll();
+            sb.append(start + " ");
+            for(int i = 1; i <= N; i++){
+                if(!visited[i] && nodes[start][i] == 1) {
+                    queue.add(i);
+                    visited[i] = true;
+                }
+            }
+        }
+    }
 }
