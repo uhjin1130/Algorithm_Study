@@ -2,21 +2,20 @@ import java.util.*;
 import java.io.*;
 
 class Node {
-    int toNode;
+    int to;
     int weight;
 
-    public Node(int end, int weight) {
-        this.toNode = end;
+    public Node(int to, int weight) {
+        this.to = to;
         this.weight = weight;
     }
 }
 
 public class Main {
     public static int V, E, K;
+    public static StringBuilder sb = new StringBuilder();
     public static ArrayList<Node>[] graph;
     public static int[] result;
-    public static boolean[] visitied;
-    public static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -28,7 +27,6 @@ public class Main {
 
         graph = new ArrayList[V + 1];
         result = new int[V + 1];
-        visitied = new boolean[V + 1];
 
         for (int i = 1; i <= V; i++) {
             graph[i] = new ArrayList<>();
@@ -36,7 +34,7 @@ public class Main {
         }
 
         int start, end, weight;
-        for (int i = 1; i <= E; i++) {
+        for (int i = 0; i < E; i++) {
             st = new StringTokenizer(br.readLine());
             start = Integer.parseInt(st.nextToken());
             end = Integer.parseInt(st.nextToken());
@@ -53,18 +51,18 @@ public class Main {
     public static void dikjstra() {
         PriorityQueue<Node> queue = new PriorityQueue<>((a, b) -> a.weight - b.weight);
         result[K] = 0;
-        queue.offer(new Node(K, 0));
+        queue.add(new Node(K, 0));
 
         while (!queue.isEmpty()) {
             Node cur = queue.poll();
 
-            if (result[cur.toNode] < cur.weight)
+            if (result[cur.to] < cur.weight)
                 continue;
 
-            for (Node node : graph[cur.toNode]) {
-                if (cur.weight + node.weight < result[node.toNode]) {
-                    result[node.toNode] = cur.weight + node.weight;
-                    queue.offer(new Node(node.toNode, result[node.toNode]));
+            for (Node node : graph[cur.to]) {
+                if (cur.weight + node.weight < result[node.to]) {
+                    result[node.to] = cur.weight + node.weight;
+                    queue.add(new Node(node.to, result[node.to]));
                 }
             }
         }
