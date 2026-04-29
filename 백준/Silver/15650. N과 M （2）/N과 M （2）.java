@@ -16,7 +16,7 @@ public class Main {
 
         arr = new int[M];
 
-        dfs(N, M, 1,0);
+        dfs(N, M, 1, 0);
         System.out.println(sb.toString());
 
     }
