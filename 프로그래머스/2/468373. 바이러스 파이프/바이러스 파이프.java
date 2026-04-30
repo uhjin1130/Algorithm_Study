@@ -89,7 +89,7 @@ class Solution {
     }
     
     public void rollback(List<Integer> added) {
-        for (int i = added.size() - 1; i >= 0; i--) {
+        for (int i = 0; i <= added.size() - 1; i++) {
             int node = added.get(i);
             infected[node] = false;
             infectedList.remove(infectedList.size() - 1);
