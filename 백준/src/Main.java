@@ -25,11 +25,7 @@ public class Main {
 
     public static void quadTree(int x, int y, int size) {
         if (check(x, y, size)) {
-            if (img[y][x] == 1)
-                sb.append(1);
-            else
-                sb.append(0);
-
+            sb.append(img[y][x]);
             return;
         } else {
             sb.append("(");
