@@ -39,10 +39,15 @@ public class Main {
 
     public static void kruskal() {
         int cost = 0;
+        int cnt = 0;
         for (int i = 1; i <= E; i++) {
             if (find(graph[i][0]) != find(graph[i][1])) {
-                cost += graph[i][2];
                 union(graph[i][0], graph[i][1]);
+                cnt++;
+                cost += graph[i][2];
+
+                if (cnt == N - 1)
+                    break;
             }
         }
 
