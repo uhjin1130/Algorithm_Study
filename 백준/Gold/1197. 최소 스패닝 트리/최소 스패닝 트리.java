@@ -68,7 +68,7 @@ public class Main {
         if (nodes[x] == x)
             return x;
         else
-            return find(nodes[x]);
+            return nodes[x] = find(nodes[x]);
     }
 
 } // class
