@@ -31,7 +31,7 @@ public class Main {
             graph[i][2] = weight;
         }
 
-        Arrays.sort(graph, (o1, o2) -> Integer.compare(o1[2], o2[2]));
+        Arrays.sort(graph, 1, E + 1, (o1, o2) -> Integer.compare(o1[2], o2[2]));
 
         kruskal();
 
