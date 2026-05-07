@@ -7,17 +7,22 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        int result = caculate(N, 0);
+        int[] dp = new int[N + 1];
+        dp[0] = 0;
+        dp[1] = 0;
 
-        System.out.println(result);
+        for (int i = 2; i <= N; i++) {
+            dp[i] = dp[i - 1] + 1; // 기본: 1 빼기
+
+            if (i % 2 == 0)
+                dp[i] = Math.min(dp[i], dp[i / 2] + 1);
+
+            if (i % 3 == 0)
+                dp[i] = Math.min(dp[i], dp[i / 3] + 1);
+        }
+
+        System.out.println(dp[N]);
 
     } // main
-
-    public static int caculate(int x, int count) {
-        if (x < 2)
-            return count;
-
-        return Math.min(caculate(x / 2, count + 1 + (x % 2)), caculate(x / 3, count + 1 + (x % 3)));
-    }
 
 } // class
