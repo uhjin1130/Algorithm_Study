@@ -70,9 +70,9 @@ class Solution {
             }
         }
         
-        // TODO 6: summits 중 intensity 최솟값 찾기
+        // summits 중 intensity 최솟값 찾기
         // summit 번호 오름차순 정렬 후 순회
-        // intensity가 같으면 번호가 작은 것 선택 (정렬로 자동 처리 가능)
+        // intensity가 같으면 번호가 작은 것 선택
         Arrays.sort(summits);
         
         int answerSummit = -1;
