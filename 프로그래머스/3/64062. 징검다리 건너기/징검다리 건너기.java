@@ -28,7 +28,6 @@ class Solution {
                 cnt = 0;
             }
         }
-        
         max = Math.max(max,cnt);
         if(max >= k)
             return false;
