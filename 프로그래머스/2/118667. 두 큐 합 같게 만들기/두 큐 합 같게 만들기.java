@@ -1,50 +1,43 @@
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Queue;
 
-class Solution {
+public class Solution {
     public int solution(int[] queue1, int[] queue2) {
-        int size = queue1.length + queue2.length + 1;
+        int answer = 0;
         
-        Queue<Integer> q1 = new LinkedList<>();
-        Queue<Integer> q2 = new LinkedList<>();
+        long sum1 = Arrays.stream(queue1).sum();
+        long sum2 = Arrays.stream(queue2).sum();
+        long total = (sum1 + sum2);
+        long half = total / 2;
         
-        long sum1 = 0L;
-        for(int n1 : queue1) {
-            sum1 += n1;
-            q1.offer(n1);
-        }
+        if (total % 2 != 0) return -1;
         
-        long sum2 = 0L;
-        for(int n2 : queue2) {
-            sum2 += n2;
-            q2.offer(n2);
-        }
+        Queue<Integer> que1 = new ArrayDeque<>();
+        Queue<Integer> que2 = new ArrayDeque<>();
+        for (int i = 0; i < queue1.length; i++) {
+            que1.offer(queue1[i]);
+            que2.offer(queue2[i]);
+        } //for - insert que
         
-        if(sum1 == sum2)
-            return 0;
-        else {
-            int cnt = 0;
-            int num1, num2;
-            while(cnt <= size && !q1.isEmpty() && !q2.isEmpty()) {
-                num1 = q1.peek();
-                num2 = q2.peek();
-                
-                if(sum1 > sum2) {
-                    q2.offer(q1.poll());
-                    sum2 += num1;
-                    sum1 -= num1;
-                } else if (sum1 < sum2) {
-                    q1.offer(q2.poll());
-                    sum1 += num2;
-                    sum2 -= num2;
-                }
-                
-                cnt++;
-                
-                if(sum1 == sum2) {
-                    return cnt;
-                }
-            }
-            return -1;
-        }
+        int limit = (que1.size() + que2.size()) * 2;
+        
+        while (answer <= limit) {
+            if (sum1 == half) {
+                return answer;
+            } else if (sum1 > half) {
+                int cur = que1.poll();
+                sum1 -= cur;
+                que2.offer(cur);
+                answer++;
+            } else {
+                int cur = que2.poll();
+                sum1 += cur;
+                que1.offer(cur);
+                answer++;
+            } //if ~ else
+        } //while
+        
+        return -1;
     }
 }
